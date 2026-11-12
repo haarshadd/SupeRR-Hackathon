@@ -1,0 +1,11 @@
+slot,covers,player_id,name,segment,squad_2026,n,conf,score,value_pct,rivals_with_similar_core,rivals_lacking_niche,label,rival_detail
+replacement,Yashasvi Jaiswal,5553,Phil Salt,overseas_capped,Royal Challengers Bengaluru,1643,0.92,0.862,0.98,7,0,High competition,CSK:Sanju Samson(0.89); GT:Shubman Gill(0.80); KKR:Finn Allen(0.82); LSG:Mitchell Marsh(0.92); MI:Ryan Rickelton(0.90); PBKS:Prabhsimran Singh(0.97); SRH:Abhishek Sharma(0.91)
+replacement,Vaibhav Sooryavanshi,2367,Travis Head,overseas_capped,Sunrisers Hyderabad,1129,0.88,0.801,0.97,6,0,High competition,CSK:Ayush Mhatre(0.93); KKR:Sunil Narine(0.85); LSG:Mitchell Marsh(0.92); MI:Ryan Rickelton(0.90); PBKS:Priyansh Arya(0.93); SRH:Abhishek Sharma(0.86)
+replacement,Donovan Ferreira,1318,Andre Russell,overseas_capped,,733,0.83,0.789,0.86,1,0,Value,RCB:Tim David(0.81)
+replacement,Jofra Archer,2399,Dushmantha Chameera,overseas_capped,Delhi Capitals,1152,0.88,0.695,0.55,0,0,Value,
+replacement,Dhruv Jurel,5939,Cameron Green,overseas_capped,Kolkata Knight Riders,1072,0.88,0.678,0.87,2,0,Value,KKR:Angkrish Raghuvanshi(0.86); LSG:Josh Inglis(0.86)
+gap,spin_mid,4900,Wanindu Hasaranga,overseas_capped,Lucknow Super Giants,2034,0.93,0.697,0.9,2,3,High competition,GT:Rashid Khan(0.83); KKR:Varun Chakravarthy(0.83)
+gap,spin_mid,32862,Allah Ghazanfar,overseas_capped,Mumbai Indians,461,0.75,0.656,0.73,0,3,High competition,
+gap,death_pace,8661,Matheesha Pathirana,overseas_capped,Kolkata Knight Riders,1135,0.88,0.818,0.91,0,5,High competition,
+gap,pp_pace,360,Bhuvneshwar Kumar,india_capped,Royal Challengers Bengaluru,2222,0.94,0.765,0.84,3,5,High competition,GT:Mohammed Siraj(0.83); LSG:Mohammed Shami(0.85); RCB:Josh Hazlewood(0.82)
+gap,mid_bat_vs_spin,6280,Harry Brook,overseas_capped,,889,0.86,0.781,0.93,4,0,High competition,MI:Suryakumar Yadav(0.96); PBKS:Shreyas Iyer(0.89); RCB:Rajat Patidar(0.86); SRH:Heinrich Klaasen(0.86)
