@@ -66,3 +66,9 @@ PRESSURE_SHRINK_K = 100          # pseudo-balls pulling pressure estimates towar
 BLEND_ABSOLUTE = 0.75            # weight on absolute pressure performance
 BLEND_DELTA = 0.25               # weight on (pressure - own ordinary level)
 N_BOOTSTRAP = 500
+
+
+# cross-fitting and first-innings pressure rule (step 2)
+N_FOLDS = 5                      # win-probability predictions are out-of-fold (by match)
+FIRST_INN_COLLAPSE_WKTS = 4      # first innings counts as "pressure" when >= this many wickets are down...
+FIRST_INN_COLLAPSE_BALLS = 84    # ...within the first 84 legal balls (before the 15th over)
