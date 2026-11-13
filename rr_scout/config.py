@@ -37,3 +37,32 @@ BOWL_FEATURES = ["eco_PP", "eco_MID", "eco_DEATH", "share_PP", "share_MID",
 # shortlist: (module, how many picks)
 GAP_PLAN = [("spin_mid", 2), ("death_pace", 1), ("pp_pace", 1), ("mid_bat_vs_spin", 1)]
 N_REPLACEMENTS = 5
+
+
+
+# ---------------------------------------------------------------------------
+# Round 1: pressure model
+# ---------------------------------------------------------------------------
+PRESSURE_OUT_DIR = OUT_DIR / "pressure"
+RANDOM_SEED = 42
+
+# match-state reconstruction
+UNRECORDED_EXTRA_RUNS = 1    # byes / leg-byes are stored with runs=0; assume 1 run each (see README)
+BALLS_PER_INNINGS = 120
+
+# win-probability model
+WP_TEST_FRACTION = 0.20      # share of matches held out to check calibration
+WP_PARAMS = dict(max_depth=4, learning_rate=0.08, max_iter=200, min_samples_leaf=200)
+
+# pressure definition
+HIGH_PRESSURE_QUANTILE = 0.75    # top 25% of leverage = "high pressure"
+OUTCOMES = ["W", "0", "1", "2", "3", "4", "6"]   # next-ball outcomes used for leverage
+
+# ratings
+MIN_PRESSURE_BALLS_BAT = 100
+MIN_PRESSURE_BALLS_BOWL = 120
+MIN_PRESSURE_MATCHES = 10
+PRESSURE_SHRINK_K = 100          # pseudo-balls pulling pressure estimates toward the league mean
+BLEND_ABSOLUTE = 0.75            # weight on absolute pressure performance
+BLEND_DELTA = 0.25               # weight on (pressure - own ordinary level)
+N_BOOTSTRAP = 500

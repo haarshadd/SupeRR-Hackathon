@@ -54,3 +54,33 @@ def resolve_cores(cores_csv, names):
             raise ValueError(f"No match in data for core player {r.player!r}")
         out.append(dict(team=r.team, given=r.player, matched=hit[0], player_id=int(by_name[hit[0]])))
     return pd.DataFrame(out)
+
+
+
+def add_match_state(b, raw):
+    """State BEFORE each delivery, needed by the win-probability model.
+
+    Adds: team_runs, runs_before, wkts_before, legal_before, balls_left, target (chases only),
+    bat_wins, t20i.  Drops matches that cannot be modelled cleanly: no winner (no result /
+    abandoned) or rain-affected (revised overs / target).
+
+    Team runs are approximate: byes and leg-byes are stored with runs=0, so each is credited
+    config.UNRECORDED_EXTRA_RUNS run. About 85% of chase outcomes then reconcile with the
+    recorded winner; most mismatches are within a few runs.
+    """
+    m = raw["matches"].set_index("match_id")
+    usable = m[m.win_team_id.notna() & m.first_inn_revised_overs.isna() & m.second_inn_revised_overs.isna()]
+    s = b[b.match_id.isin(usable.index)].sort_values(["match_id", "innings", "innings_ball_num"]).copy()
+    extra = (s.wide | s.nb | s.extras_type.eq("other")).astype(int) \
+        + s.extras_type.isin(["byes", "legbyes"]).astype(int) * C.UNRECORDED_EXTRA_RUNS
+    s["team_runs"] = s.runs + extra
+    g = s.groupby(["match_id", "innings"])
+    s["runs_before"] = g.team_runs.cumsum() - s.team_runs
+    s["wkts_before"] = g.is_wicket.cumsum() - s.is_wicket.astype(int)
+    s["legal_before"] = g.legal.cumsum() - s.legal.astype(int)
+    s["balls_left"] = C.BALLS_PER_INNINGS - s.legal_before
+    first_total = s[s.innings == 1].groupby("match_id").team_runs.sum()
+    s["target"] = (s.match_id.map(first_total) + 1).where(s.innings == 2)
+    s["bat_wins"] = (s.batting_team_id == s.match_id.map(usable.win_team_id)).astype(int)
+    s["t20i"] = s.match_format.eq("T20I").astype(int)
+    return s
