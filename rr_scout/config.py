@@ -72,3 +72,19 @@ N_BOOTSTRAP = 500
 N_FOLDS = 5                      # win-probability predictions are out-of-fold (by match)
 FIRST_INN_COLLAPSE_WKTS = 4      # first innings counts as "pressure" when >= this many wickets are down...
 FIRST_INN_COLLAPSE_BALLS = 84    # ...within the first 84 legal balls (before the 15th over)
+
+
+# win-probability model fitting (logistic regression, numpy/scipy only)
+WP_L2 = 1.0                      # ridge penalty
+WP_MAXITER = 500                 # maximum iterations for optimization
+
+# ratings (step 3)
+LCB_QUANTILE = 0.20              # players are ranked by this lower quantile of the bootstrap blended score
+
+
+# auction availability: players in cores.csv are treated as retained, so not available
+EXCLUDE_NATIONAL_TEAMS = {"Pakistan", "Pakistan A", "Bangladesh", "Bangladesh A"}   # assumed not to enter the auction
+
+# opposition-strength adjustment (step 4a)
+OPPOSITION_ADJUST = True         # credit players against what is expected vs THAT opposition
+TEAM_EFFECT_L2 = 300.0           # ridge penalty (pseudo-balls) for team batting/bowling effects

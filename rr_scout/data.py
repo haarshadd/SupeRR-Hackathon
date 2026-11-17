@@ -42,9 +42,19 @@ def player_names(b):
     return n.dropna().drop_duplicates("id").set_index("id").name
 
 
+def read_cores(path):
+    """Read cores.csv whether it is comma- or tab-separated; needs columns team, player."""
+    df = pd.read_csv(path, sep=None, engine="python")
+    df.columns = [c.strip().lower() for c in df.columns]
+    if not {"team", "player"} <= set(df.columns):
+        raise ValueError(f"{path} must have columns team and player, found {list(df.columns)}")
+    df["team"], df["player"] = df.team.astype(str).str.strip(), df.player.astype(str).str.strip()
+    return df[(df.team != "") & (df.player != "")].drop_duplicates(["team", "player"]).reset_index(drop=True)
+
+
 def resolve_cores(cores_csv, names):
     """Map core player names to ids (fuzzy, so spelling slips still resolve). Fails loudly."""
-    cores = pd.read_csv(cores_csv)
+    cores = read_cores(cores_csv)
     pool = list(names.unique())
     by_name = names.reset_index().groupby("name").id.first()
     out = []
