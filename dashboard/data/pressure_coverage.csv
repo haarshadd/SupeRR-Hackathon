@@ -1,0 +1,10 @@
+scope,pressure_tier,deliveries,share,matches,scope_total_deliveries
+all_delivery_rows,ordinary,158333,0.8242217595002603,806,192100
+all_delivery_rows,chase_leverage,23137,0.1204424778761062,533,192100
+all_delivery_rows,first_innings_collapse,10630,0.05533576262363352,421,192100
+legal_deliveries_only,ordinary,151810,0.8241540491093968,806,184201
+legal_deliveries_only,chase_leverage,22066,0.11979305215498287,533,184201
+legal_deliveries_only,first_innings_collapse,10325,0.056052898735620325,421,184201
+non_legal_delivery_rows,ordinary,6523,0.8258007342701608,800,7899
+non_legal_delivery_rows,chase_leverage,1071,0.13558678313710595,370,7899
+non_legal_delivery_rows,first_innings_collapse,305,0.038612482592733255,181,7899

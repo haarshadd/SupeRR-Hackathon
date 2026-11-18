@@ -1,0 +1,13 @@
+role,rating,predicts_held_out_pressure,split_half_reliability,players_per_split,splits
+bat,legacy blend (75% pressure score + 25% pressure-minus-ordinary),0.011,-0.004,58,100
+bat,0% pressure + 100% ordinary,0.123,0.213,58,100
+bat,25% pressure + 75% ordinary  <- configured,0.118,0.24,58,100
+bat,50% pressure + 50% ordinary,0.101,0.205,58,100
+bat,75% pressure + 25% ordinary,0.07,0.123,58,100
+bat,100% pressure + 0% ordinary,0.037,0.046,58,100
+bowl,legacy blend (75% pressure score + 25% pressure-minus-ordinary),0.205,0.196,65,100
+bowl,0% pressure + 100% ordinary,0.176,0.178,65,100
+bowl,25% pressure + 75% ordinary,0.224,0.271,65,100
+bowl,50% pressure + 50% ordinary  <- configured,0.255,0.326,65,100
+bowl,75% pressure + 25% ordinary,0.254,0.304,65,100
+bowl,100% pressure + 0% ordinary,0.23,0.24,65,100

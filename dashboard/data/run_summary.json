@@ -1,0 +1,123 @@
+{
+  "primary_rating_method": "hierarchical",
+  "usable_matches": 806,
+  "prepared_delivery_rows": 192279,
+  "pressure_rows_saved": 192100,
+  "legal_deliveries": 184201,
+  "non_legal_delivery_rows": 7899,
+  "pressure_tier_counts_legal_only": {
+    "chase_leverage": 22066,
+    "first_innings_collapse": 10325,
+    "ordinary": 151810
+  },
+  "pressure_tier_counts_all_rows": {
+    "chase_leverage": 23137,
+    "first_innings_collapse": 10630,
+    "ordinary": 158333
+  },
+  "pressure_methodology": {
+    "first_innings_rule": "4+ wickets within 84 legal balls",
+    "chase_leverage_threshold": 0.019902614761484465,
+    "chase_quantile": 0.75
+  },
+  "rating": {
+    "weights": {
+      "bat": {
+        "pressure": 0.25,
+        "ordinary": 0.75
+      },
+      "bowl": {
+        "pressure": 0.5,
+        "ordinary": 0.5
+      }
+    },
+    "pressure_shrink_k": 150,
+    "minimum_pressure_balls_batter": 150,
+    "minimum_pressure_balls_bowler": 150,
+    "minimum_pressure_matches": 15,
+    "bootstrap_replicates": 500,
+    "lower_confidence_quantile": 0.2,
+    "opposition_adjustment": true
+  },
+  "win_probability_metrics": [
+    {
+      "innings": 1,
+      "rows": 100225,
+      "matches": 806,
+      "auc": 0.6956880733535057,
+      "logloss": 0.6314708600972915,
+      "baseline_logloss": 0.6931457923632133
+    },
+    {
+      "innings": 2,
+      "rows": 92054,
+      "matches": 806,
+      "auc": 0.8975896008817471,
+      "logloss": 0.3999585404879739,
+      "baseline_logloss": 0.692318086328977
+    }
+  ],
+  "ranking_comparison": {
+    "bat": {
+      "hierarchical_top10": [
+        "Tim David",
+        "Suryakumar Yadav",
+        "Heinrich Klaasen",
+        "Andre Russell",
+        "Namboori Tilak Varma",
+        "Sai Sudharsan",
+        "Mitchell Marsh",
+        "Rinku Singh",
+        "Dasun Shanaka",
+        "Nicholas Pooran"
+      ],
+      "legacy_top10": [
+        "Rinku Singh",
+        "Rahul Tewatia",
+        "Kamindu Mendis",
+        "Heinrich Klaasen",
+        "Mohammad Nawaz",
+        "Suryakumar Yadav",
+        "Towhid Hridoy",
+        "Tim David",
+        "Washington Sundar",
+        "Namboori Tilak Varma"
+      ],
+      "top10_membership_overlap": 5,
+      "spearman_rank_correlation": 0.33740502630040914
+    },
+    "bowl": {
+      "hierarchical_top10": [
+        "Varun Chakravarthy",
+        "Wanindu Hasaranga",
+        "Sunil Narine",
+        "Rashid Khan",
+        "Josh Hazlewood",
+        "Kuldeep Yadav",
+        "Abrar Ahmed",
+        "Krunal Pandya",
+        "Nathan Ellis",
+        "Axar Patel"
+      ],
+      "legacy_top10": [
+        "Sunil Narine",
+        "Mohammad Nawaz",
+        "Varun Chakravarthy",
+        "Mujeeb Ur Rahman",
+        "Krunal Pandya",
+        "Kuldeep Yadav",
+        "Axar Patel",
+        "Akeal Hosein",
+        "Sikandar Raza",
+        "Yuzvendra Chahal"
+      ],
+      "top10_membership_overlap": 5,
+      "spearman_rank_correlation": 0.704832480951884
+    }
+  },
+  "outputs": {
+    "pressure_file": "C:\\Users\\haars\\Downloads\\rr_auction_scout\\outputs\\pressure\\ball_pressure.csv.gz",
+    "coverage": "C:\\Users\\haars\\Downloads\\rr_auction_scout\\outputs\\pressure\\pressure_coverage.csv",
+    "rating_method_comparison": "C:\\Users\\haars\\Downloads\\rr_auction_scout\\outputs\\pressure\\rating_method_comparison.csv"
+  }
+}
