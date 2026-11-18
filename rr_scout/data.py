@@ -78,13 +78,88 @@ def add_match_state(b, raw):
     config.UNRECORDED_EXTRA_RUNS run. About 85% of chase outcomes then reconcile with the
     recorded winner; most mismatches are within a few runs.
     """
-    m = raw["matches"].set_index("match_id")
-    usable = m[m.win_team_id.notna() & m.first_inn_revised_overs.isna() & m.second_inn_revised_overs.isna()]
-    s = b[b.match_id.isin(usable.index)].sort_values(["match_id", "innings", "innings_ball_num"]).copy()
-    extra = (s.wide | s.nb | s.extras_type.eq("other")).astype(int) \
-        + s.extras_type.isin(["byes", "legbyes"]).astype(int) * C.UNRECORDED_EXTRA_RUNS
-    s["team_runs"] = s.runs + extra
-    g = s.groupby(["match_id", "innings"])
+    
+    m = raw["matches"].set_index("match_id").copy()
+
+    # The recorded winner must be the winner of the regular match,
+    # not a Super Over winner.
+    result = m["result"].fillna("").astype(str)
+
+    is_super_over = result.str.contains(
+        r"\bsuper[\s-]*over\b",
+        case=False,
+        regex=True
+    )
+
+    is_tied = result.str.contains(
+        r"\btied\b|\bmatch\s*tie\b",
+        case=False,
+        regex=True
+    )
+
+    # Some DLS matches in the dataset have no revised-overs fields,
+    # so we must also inspect the result description.
+    is_dls = result.str.contains(
+        r"\bDLS\b|\bD/L\b|Duckworth",
+        case=False,
+        regex=True
+    )
+
+    is_no_result = result.str.contains(
+        r"\bno result\b|abandon",
+        case=False,
+        regex=True
+    )
+
+    # Exclude any match with revised playing conditions.
+    has_revised_rules = m[
+        [
+            "first_inn_revised_overs",
+            "second_inn_revised_overs",
+            "revised_target"
+        ]
+    ].notna().any(axis=1)
+
+    usable_mask = (
+        m["win_team_id"].notna()
+        & ~has_revised_rules
+        & ~is_super_over
+        & ~is_tied
+        & ~is_dls
+        & ~is_no_result
+    )
+
+    usable = m.loc[usable_mask]
+
+    s = b[
+        b.match_id.isin(usable.index)
+    ].sort_values(
+        ["match_id", "innings", "innings_ball_num"]
+    ).copy()
+
+
+    # Base extras:
+    # - wides, no-balls and other extras receive a one-run base
+    # - byes and leg-byes receive the configured one-run approximation
+    base_extra = (
+        (s.wide | s.nb | s.extras_type.eq("other")).astype(int)
+        + s.extras_type.isin(["byes", "legbyes"]).astype(int)
+        * C.UNRECORDED_EXTRA_RUNS
+    )
+
+    # extras_2_runs is the numeric additional-extras field.
+    recorded_extra = (
+        pd.to_numeric(s["extras_2_runs"], errors="coerce")
+        .fillna(0)
+    )
+
+    s["team_runs"] = (
+        pd.to_numeric(s["runs"], errors="coerce").fillna(0)
+        + base_extra
+        + recorded_extra
+    )
+
+    g = s.groupby(["match_id", "innings"], sort=False)
     s["runs_before"] = g.team_runs.cumsum() - s.team_runs
     s["wkts_before"] = g.is_wicket.cumsum() - s.is_wicket.astype(int)
     s["legal_before"] = g.legal.cumsum() - s.legal.astype(int)

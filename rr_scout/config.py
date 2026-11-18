@@ -59,10 +59,10 @@ HIGH_PRESSURE_QUANTILE = 0.75    # top 25% of leverage = "high pressure"
 OUTCOMES = ["W", "0", "1", "2", "3", "4", "6"]   # next-ball outcomes used for leverage
 
 # ratings
-MIN_PRESSURE_BALLS_BAT = 100
-MIN_PRESSURE_BALLS_BOWL = 120
-MIN_PRESSURE_MATCHES = 10
-PRESSURE_SHRINK_K = 100          # pseudo-balls pulling pressure estimates toward the league mean
+MIN_PRESSURE_BALLS_BAT = 150
+MIN_PRESSURE_BALLS_BOWL = 150
+MIN_PRESSURE_MATCHES = 15
+PRESSURE_SHRINK_K = 150          # pseudo-balls pulling pressure estimates toward the league mean
 BLEND_ABSOLUTE = 0.75            # weight on absolute pressure performance
 BLEND_DELTA = 0.25               # weight on (pressure - own ordinary level)
 N_BOOTSTRAP = 500

@@ -1,5 +1,8 @@
-   data/
-   __pycache__/
-   *.pyc
-   .venv/
-   outputs/pressure/ball_pressure.csv.gz
+data/
+__pycache__/
+*.pyc
+*.pyo
+*.zip
+.venv/
+outputs/pressure/ball_pressure.csv.gz
+outputs/pressure_before_step1/

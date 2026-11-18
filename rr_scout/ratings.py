@@ -19,14 +19,110 @@ from . import config as C
 
 
 def credit_rows(r, role, adjust=None):
+    """
+    Calculate player-attributed pressure credits.
+
+    Batter:
+      - Receives wicket impact only when the striker was dismissed.
+      - A non-striker run-out is not charged to the striker.
+
+    Bowler:
+      - Receives wicket impact only for a bowler-credited dismissal.
+      - Run-outs and other non-bowler dismissals do not count as
+        wickets caused by the bowler.
+
+    Opposition-adjusted and neutral scoring both preserve
+    the same dismissal-attribution rules.
+    """
     adjust = C.OPPOSITION_ADJUST if adjust is None else adjust
+
+    required = {
+        "wpa", "wpa_no_wicket", "exp_wpa",
+        "wpae_bat_player", "wpae_bowl_player",
+        "is_wicket", "dis_bat", "bowler_wkt",
+        "wide", "striker_id", "bowler_id",
+        "high_pressure", "leverage"
+    }
+
+    missing = required.difference(r.columns)
+
+    if missing:
+        raise ValueError(
+            "Missing player-attribution columns: "
+            + ", ".join(sorted(missing))
+            + ". Recompute pressure data first."
+        )
+
+    is_wicket = r["is_wicket"].fillna(False).astype(bool)
+
     if role == "bat":
-        c = r[~r.wide].assign(player_id=r.striker_id, credit=r.wpae_bat if adjust else r.wpae)
+        c = r.loc[~r["wide"].astype(bool)].copy()
+
+        if adjust:
+            credit = c["wpae_bat_player"]
+        else:
+            striker_dismissed = (
+                c["dis_bat"].fillna(False).astype(bool)
+            )
+            wicket_without_striker = (
+                c["is_wicket"].fillna(False).astype(bool)
+                & ~striker_dismissed
+            )
+
+            credit = (
+                c["wpa_no_wicket"] - c["exp_wpa"]
+            ).where(
+                wicket_without_striker,
+                c["wpa"] - c["exp_wpa"]
+            )
+
+        c = c.assign(
+            player_id=c["striker_id"],
+            credit=credit
+        )
+
+    elif role == "bowl":
+        c = r.copy()
+
+        if adjust:
+            credit = -c["wpae_bowl_player"]
+        else:
+            bowler_credited = (
+                c["bowler_wkt"].fillna(False).astype(bool)
+            )
+
+            wicket_without_bowler = (
+                c["is_wicket"].fillna(False).astype(bool)
+                & ~bowler_credited
+            )
+
+            credit = -(
+                c["wpa_no_wicket"] - c["exp_wpa"]
+            ).where(
+                wicket_without_bowler,
+                c["wpa"] - c["exp_wpa"]
+            )
+
+        c = c.assign(
+            player_id=c["bowler_id"],
+            credit=credit
+        )
+
     else:
-        c = r.assign(player_id=r.bowler_id, credit=-(r.wpae_bowl if adjust else r.wpae))
-    hp = c.high_pressure.values
-    return c.assign(cp=np.where(hp, c.credit, 0.0), lp=np.where(hp, c.leverage, 0.0), n_p=hp.astype(int),
-                    co=np.where(~hp, c.credit, 0.0), lo=np.where(~hp, c.leverage, 0.0), n_o=(~hp).astype(int))
+        raise ValueError(
+            "role must be either 'bat' or 'bowl'"
+        )
+
+    hp = c["high_pressure"].astype(bool)
+
+    return c.assign(
+        cp=np.where(hp, c.credit, 0.0),
+        lp=np.where(hp, c.leverage, 0.0),
+        n_p=hp.astype(int),
+        co=np.where(~hp, c.credit, 0.0),
+        lo=np.where(~hp, c.leverage, 0.0),
+        n_o=(~hp).astype(int)
+    )
 
 
 def _describe(c, role):

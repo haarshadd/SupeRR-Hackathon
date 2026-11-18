@@ -1,0 +1,21 @@
+role,test,scenario,eligible_players,top10_overlap,spearman_common,top10_names
+bat,baseline,configured,59,10,1.0,Rinku Singh; Rahul Tewatia; Kamindu Mendis; Heinrich Klaasen; Mohammad Nawaz; Suryakumar Yadav; Towhid Hridoy; Tim David; Washington Sundar; Namboori Tilak Varma
+bat,split_vs_baseline,half_A,11,5,0.8181818181818182,Heinrich Klaasen; Tim David; Rinku Singh; Hardik Pandya; Suryakumar Yadav; Ishan Kishan; Namboori Tilak Varma; Rovman Powell; Dasun Shanaka; Nicholas Pooran
+bat,split_vs_baseline,half_B,13,4,0.5549450549450549,Nicholas Pooran; Rovman Powell; Heinrich Klaasen; Namboori Tilak Varma; Suryakumar Yadav; Shreyas Iyer; Tristan Stubbs; David Miller; Hardik Pandya; Tim David
+bat,split_A_vs_B,independent_halves,13,7,-0.09523809523809526,Nicholas Pooran; Rovman Powell; Heinrich Klaasen; Namboori Tilak Varma; Suryakumar Yadav; Shreyas Iyer; Tristan Stubbs; David Miller; Hardik Pandya; Tim David
+bat,pressure_rule,chase_top_30_percent,70,8,0.9325540619520751,Rinku Singh; Rahul Tewatia; Kamindu Mendis; Heinrich Klaasen; Tim David; Mohammad Nawaz; Towhid Hridoy; Suryakumar Yadav; Virat Kohli; Ishan Kishan
+bat,pressure_rule,chase_top_20_percent,46,8,0.9527597903176072,Rahul Tewatia; Rinku Singh; Heinrich Klaasen; Kamindu Mendis; Suryakumar Yadav; Tim David; Towhid Hridoy; Shreyas Iyer; Rovman Powell; Namboori Tilak Varma
+bat,pressure_rule,collapse_3_wkts_84_balls,80,8,0.958386908240795,Rahul Tewatia; Rinku Singh; Kamindu Mendis; Tim David; Towhid Hridoy; Heinrich Klaasen; Glenn Phillips; Mohammad Nawaz; Virat Kohli; Suryakumar Yadav
+bat,pressure_rule,collapse_4_wkts_72_balls,42,8,0.9863868406125923,Rinku Singh; Rahul Tewatia; Kamindu Mendis; Heinrich Klaasen; Tim David; Suryakumar Yadav; Towhid Hridoy; Namboori Tilak Varma; Rovman Powell; Shreyas Iyer
+bat,pressure_rule,collapse_4_wkts_96_balls,78,8,0.977615429573349,Rahul Tewatia; Heinrich Klaasen; Kamindu Mendis; Rinku Singh; Mohammad Nawaz; Suryakumar Yadav; Virat Kohli; Matthew Wade; Towhid Hridoy; Tim David
+bat,sample_size,150_balls_15_matches,59,10,1.0,Rinku Singh; Rahul Tewatia; Kamindu Mendis; Heinrich Klaasen; Mohammad Nawaz; Suryakumar Yadav; Towhid Hridoy; Tim David; Washington Sundar; Namboori Tilak Varma
+bowl,baseline,configured,66,10,1.0,Sunil Narine; Mohammad Nawaz; Varun Chakravarthy; Mujeeb Ur Rahman; Krunal Pandya; Kuldeep Yadav; Axar Patel; Akeal Hosein; Sikandar Raza; Yuzvendra Chahal
+bowl,split_vs_baseline,half_A,14,5,0.767032967032967,Axar Patel; Varun Chakravarthy; Akeal Hosein; Sunil Narine; Rashid Khan; Maheesh Theekshana; Ravindra Jadeja; Arshdeep Singh; Kuldeep Yadav; Harshal Patel
+bowl,split_vs_baseline,half_B,20,7,0.8601503759398496,Kuldeep Yadav; Sunil Narine; Mohammad Nawaz; Yuzvendra Chahal; Krunal Pandya; Varun Chakravarthy; Wanindu Hasaranga; Axar Patel; Rashid Khan; Ravichandran Ashwin
+bowl,split_A_vs_B,independent_halves,20,5,0.2727272727272727,Kuldeep Yadav; Sunil Narine; Mohammad Nawaz; Yuzvendra Chahal; Krunal Pandya; Varun Chakravarthy; Wanindu Hasaranga; Axar Patel; Rashid Khan; Ravichandran Ashwin
+bowl,pressure_rule,chase_top_30_percent,75,8,0.9827157916710157,Lockie Ferguson; Sunil Narine; Mohammad Nawaz; Krunal Pandya; Varun Chakravarthy; Kuldeep Yadav; Axar Patel; Yuzvendra Chahal; Mujeeb Ur Rahman; Gudakesh Motie
+bowl,pressure_rule,chase_top_20_percent,57,9,0.9763417163598652,Sunil Narine; Krunal Pandya; Mohammad Nawaz; Varun Chakravarthy; Axar Patel; Saim Ayub; Mujeeb Ur Rahman; Sikandar Raza; Kuldeep Yadav; Akeal Hosein
+bowl,pressure_rule,collapse_3_wkts_84_balls,82,6,0.9789583550777581,Lockie Ferguson; Sufiyan Muqeem; Sunil Narine; Umran Malik; Varun Chakravarthy; Mohammad Nawaz; Mujeeb Ur Rahman; Jimmy Neesham; Axar Patel; Krunal Pandya
+bowl,pressure_rule,collapse_4_wkts_72_balls,52,8,0.9910356014684537,Sunil Narine; Mohammad Nawaz; Varun Chakravarthy; Mujeeb Ur Rahman; Krunal Pandya; Akeal Hosein; Axar Patel; Sikandar Raza; Rashid Khan; Gudakesh Motie
+bowl,pressure_rule,collapse_4_wkts_96_balls,78,8,0.9901054169710887,Lockie Ferguson; Sunil Narine; Varun Chakravarthy; Mohammad Nawaz; Mujeeb Ur Rahman; Kuldeep Yadav; Krunal Pandya; Shoriful Islam; Axar Patel; Akeal Hosein
+bowl,sample_size,150_balls_15_matches,66,10,1.0,Sunil Narine; Mohammad Nawaz; Varun Chakravarthy; Mujeeb Ur Rahman; Krunal Pandya; Kuldeep Yadav; Axar Patel; Akeal Hosein; Sikandar Raza; Yuzvendra Chahal
