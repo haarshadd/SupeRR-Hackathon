@@ -8,29 +8,54 @@ DATA = BASE / "data"
 
 st.set_page_config(page_title="SupeRR Selector | Pressure Intelligence", page_icon="🏏", layout="wide")
 
-# Rajasthan Royals-inspired visual system; no official team marks are used.
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
-.stApp { background: #f5f6f8; color: #172033; }
-.block-container { padding-top: 1.5rem; max-width: 1440px; }
-h1,h2,h3 { font-family: 'Space Grotesk', sans-serif !important; }
-.hero { background: linear-gradient(120deg,#14263d 0%,#253f5b 68%,#b88a2d 160%); padding: 28px 32px; border-radius: 18px; color: white; margin-bottom: 20px; }
-.hero-kicker { color: #e8bd62; text-transform: uppercase; letter-spacing: .16em; font-size: 11px; font-weight: 700; }
-.hero h1 { color: white; font-size: 34px; margin: 6px 0 4px 0; }
-.hero p { color: #dce5ee; margin: 0; font-size: 14px; }
-.metric-card { background: white; border: 1px solid #e6e9ee; border-radius: 14px; padding: 15px 17px; min-height: 90px; }
-.metric-label { color:#697586; font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; }
-.metric-value { color:#14263d; font-family:'Space Grotesk'; font-size:25px; font-weight:700; margin-top:4px; }
-.metric-note { color:#8a94a3; font-size:11px; margin-top:1px; }
-.section-kicker { color:#b18428; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
-div[data-testid="stDataFrame"] { border:1px solid #e6e9ee; border-radius:12px; overflow:hidden; }
-div[data-testid="stTabs"] button { font-weight:700; }
-.note { background:#fff8e9; border-left:4px solid #d5a43b; padding:12px 14px; border-radius:8px; color:#59451e; font-size:13px; }
-.footer { color:#7c8795; font-size:11px; border-top:1px solid #e1e5ea; padding-top:12px; margin-top:28px; }
+/* Main dark background */
+[data-testid="stAppViewContainer"] {
+    background-color: #171717;
+}
+
+/* Main content headings */
+[data-testid="stAppViewContainer"] h1,
+[data-testid="stAppViewContainer"] h2,
+[data-testid="stAppViewContainer"] h3 {
+    color: #F5F5F5 !important;
+}
+
+/* Main content text */
+[data-testid="stAppViewContainer"] p,
+[data-testid="stAppViewContainer"] label,
+[data-testid="stAppViewContainer"] [data-testid="stMetricLabel"] {
+    color: #D1D5DB !important;
+}
+
+/* Metric values */
+[data-testid="stMetricValue"] {
+    color: #FFFFFF !important;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #201F1E !important;
+}
+
+/* Buttons */
+[data-testid="stButton"] button,
+[data-testid="stDownloadButton"] button {
+    background-color: #B88924 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
+
+/* Buttons hover */
+[data-testid="stButton"] button:hover,
+[data-testid="stDownloadButton"] button:hover {
+    background-color: #956D16 !important;
+    color: #FFFFFF !important;
+}
 </style>
 """, unsafe_allow_html=True)
+
 
 @st.cache_data
 def load_csv(name):
@@ -105,7 +130,11 @@ with right:
     fig = px.bar(display.sort_values(metric, ascending=is_bat), x=metric, y="name", orientation="h", text=metric,
                  labels={metric:metric_label,"name":"Player"}, color_discrete_sequence=["#bd922f"])
     fig.update_traces(texttemplate="%{text:.1f}", textposition="outside", cliponaxis=False)
-    fig.update_layout(height=390, margin=dict(l=5,r=30,t=10,b=10), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font_color="#435064", yaxis=dict(categoryorder="total ascending"))
+    fig.update_layout(
+    font=dict(color="#E5E7EB"),
+    paper_bgcolor="#171717",
+    plot_bgcolor="#171717"
+)
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar":False})
 
 st.divider()
